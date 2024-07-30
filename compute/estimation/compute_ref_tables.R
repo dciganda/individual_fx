@@ -8,18 +8,16 @@
 # fertility rates -- ages 10 to 49. 
 
 # Hyperparameters ----
-ini_c <- 5000   # size of initial cohort 
+ini_c <- 3235   # size of initial cohort 
 n <- 100        # nr of parallel runs 
-iter <- 30000   # number of iterations
+iter <- 100000   # number of iterations
 
 # Priors ----
 beta1 <- runif(n*iter, 0.3, 0.9)      # spline parameter - peak fecundability
 beta2 <- runif(n*iter, -0.1, 0) # spline parameter - fecundability decline
 delta <-  runif(n*iter, 6, 18)            # mean length non suceptibility period 
 mu_m <- runif(n*iter, 19, 27)           # mean log normal model age at union
-sigma_m <- runif(n*iter, 4.5, 4.9)     # sd log normal model age at union
-
-#sigma_m <- runif(n*iter, 2, 7)     # sd log normal model age at union
+sigma_m <- runif(n*iter, 2, 7)     # sd log normal model age at union
 
 
 # parameters ----

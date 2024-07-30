@@ -41,20 +41,21 @@ comfert_natural <- function(ini_c = 5000,
     }
     
   }
-
+  
   age_birth <- (wt_c + 9)/12
   data <- as.data.frame(cbind(id, age_birth))[order(age_birth),]
-  data$cum_nac <- cumsum(!is.na(data$id))
-  data$cum_fec <- data$cum_nac/ini_c
-  cum_rates <- sapply((by(data$cum_fec, floor(data$age_birth), max)),I)
-  all_cum_rates <- setNames(rep(0, 51), as.character(0:50))
-  all_cum_rates[names(cum_rates)] <- unlist(cum_rates)
-  fx <- diff(all_cum_rates)
-  fx[fx<0] <- 0
-  fx <- as.data.frame(cbind(age = 10:49, fx[10:49]))
+  data$age_birth <- as.numeric(data$age_birth)
+  births_by_age <- table(floor(data$age_birth))
+  all_births <- rep(0, 51)
+  names(all_births) <- 0:50
+  all_births[names(births_by_age)] <- births_by_age
+  fx <- all_births / ini_c
+  fx <- as.data.frame(cbind(age = 10:49, fx[11:50]))
   
   return(fx)
-
+  
 }
+
+
 
 
